@@ -1,3 +1,6 @@
+mod register;
+mod encryptedregister;
+
 use tfhe::prelude::*;
 use tfhe::{generate_keys, set_server_key, ConfigBuilder, FheUint32, ServerKey};
 
