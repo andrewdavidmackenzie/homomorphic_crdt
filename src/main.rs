@@ -11,11 +11,14 @@ fn main() {
     let clear_a: u32 = 27;
     let clear_b: u32 = 128;
 
+    let encrypted_a = FheUint32::encrypt(clear_a, &client_key);
+    let encrypted_b = FheUint32::encrypt(clear_b, &client_key);
+
     // encrypt plaintext and "send to server"
     let result = server_compute(
         server_key,
-        FheUint32::encrypt(clear_a, &client_key),
-        FheUint32::encrypt(clear_b, &client_key),
+        encrypted_a,
+        encrypted_b,
     );
 
     // decrypt the result
@@ -23,6 +26,7 @@ fn main() {
 
     // assert that the result is what we expect
     assert_eq!(decrypted_result, clear_a + clear_b);
+    println!("Encrypted sum equals unencrypted sum");
 }
 
 fn server_compute(key: ServerKey, cipher_a: FheUint32, cipher_b: FheUint32) -> FheUint32 {
