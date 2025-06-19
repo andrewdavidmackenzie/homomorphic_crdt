@@ -23,10 +23,9 @@ fn main() {
 
     // assert that the result is what we expect
     assert_eq!(decrypted_result, clear_a + clear_b);
-    println!("Encrypted sum equals unencrypted sum")
 }
 
 fn server_compute(key: ServerKey, cipher_a: FheUint32, cipher_b: FheUint32) -> FheUint32 {
     set_server_key(key);
-    return cipher_a + cipher_b;
+    cipher_a + cipher_b
 }
